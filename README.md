@@ -1,3 +1,5 @@
+This repo contains majority of the files for the Frontarm.com React Fundamentals course. I commit each section separately, if you need a particular section please check through the versions.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

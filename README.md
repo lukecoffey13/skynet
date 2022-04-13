@@ -1,4 +1,4 @@
-# This repo contains majority of the files for the Frontarm.com React Fundamentals course. I commit each section separately, if you need a particular section please check through the versions.
+This repo contains majority of the files for the Frontarm.com React Fundamentals course. I commit each section separately, if you need a particular section please check through the versions.
 
 # Getting Started with Create React App
 

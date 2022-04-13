@@ -3,11 +3,34 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './styles.css'
+
+function Contact(props) {
+  let {name, email, photoURL} = props
+  let names = name.split(' ')
+  let initials = names.map(name => name[0].toUpperCase()).join('')
+  return (
+    <div className='Contact'>
+      <div className='Contact-avatar'>
+        {initials}
+        {photoURL && <img src={photoURL} />}
+      </div>
+      <span className='Contact-name'>
+        {name}
+      </span>
+      <a href={"mailto:"+email}>
+        {email}
+      </a>
+    </div>
+    )
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Contact
+    name='James'
+    email='james@frontarm.com'
+    photoURL='https://frontarm.com/courses/react-fundamentals/james-k-nelson.jpg'
+  />,
   document.getElementById('root')
 );
 

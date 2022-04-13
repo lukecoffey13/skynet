@@ -3,34 +3,30 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import './styles.css'
+import { Contact } from './Contact.js'
+import { billionaires } from './billionaires.js'
 
-function Contact(props) {
-  let {name, email, photoURL} = props
-  let names = name.split(' ')
-  let initials = names.map(name => name[0].toUpperCase()).join('')
+/*** put your `ContactList` component here ***/
+function ContactList(props) {
   return (
-    <div className='Contact'>
-      <div className='Contact-avatar'>
-        {initials}
-        {photoURL && <img src={photoURL} />}
-      </div>
-      <span className='Contact-name'>
-        {name}
-      </span>
-      <a href={"mailto:"+email}>
-        {email}
-      </a>
+    <div className='ContactList'>
+      <h2 className='ContactList-title'>Contacts</h2>
+      {props.children}
     </div>
-    )
+  )
 }
 
+let contactElements = billionaires.map(billionaire =>
+  // The ... adds all properties from `billionaire`
+  // to the <Contact> element's props.
+  <Contact {...billionaire} key={billionaire.email} />
+)
+
+
 ReactDOM.render(
-  <Contact
-    name='James'
-    email='james@frontarm.com'
-    photoURL='https://frontarm.com/courses/react-fundamentals/james-k-nelson.jpg'
-  />,
+  <React.StrictMode>
+    <ContactList>{contactElements}</ContactList>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

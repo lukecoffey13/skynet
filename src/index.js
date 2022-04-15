@@ -41,8 +41,10 @@ function Frame({time}) {
         overflow: 'hidden',
       }}
       onMouseMove={event => {
-        mousePosition.x = event.clientX
-        mousePosition.y = event.clientY
+        setMousePosition({
+          x: event.clientX,
+          y: event.clientY,
+        })
       }}>
       <FractalTreeBranch lean={lean} size={150} sprout={sprout} />
     </div>

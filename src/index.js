@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import FractalTreeBranch from './FractalTreeBranch'
+import ReactDOM from 'react-dom'
+import React, { useState } from 'react'
 
 // The height and width of the entire window
 const { innerHeight, innerWidth } = window
@@ -14,9 +14,13 @@ let mousePosition = {
   y: innerHeight / 2,
 }
 
-function renderFrame(event) {
-  // Compute "lean" and "sprout" based on time and current mouse position
-  let time = Date.now()
+function Frame({time}) {
+  let [mousePosition, setMousePosition] = useState({
+    x: innerWidth / 2,
+    y: innerHeight / 2,
+  })
+  
+  
   let fromHorizontalCenter = (innerWidth / 2 - mousePosition.x) / innerWidth
   let fromVerticalCenter = (innerHeight / 2 - mousePosition.y) / innerHeight
   let lean = 0.03 * Math.sin(time / 2000) + fromHorizontalCenter / 4
@@ -25,13 +29,9 @@ function renderFrame(event) {
     0.05 * Math.sin(time / 1300) +
     fromVerticalCenter / 5 -
     0.2 * Math.abs(0.5 - fromHorizontalCenter / 2)
-
-  ReactDOM.render(
+  
+  return (
     <div
-      onMouseMove={(event) => {
-        mousePosition.x = event.clientX
-        mousePosition.y = event.clientY
-      }}
       style={{
         position: 'absolute',
         top: 0,
@@ -39,9 +39,20 @@ function renderFrame(event) {
         bottom: 0,
         right: 0,
         overflow: 'hidden',
+      }}
+      onMouseMove={event => {
+        mousePosition.x = event.clientX
+        mousePosition.y = event.clientY
       }}>
       <FractalTreeBranch lean={lean} size={150} sprout={sprout} />
-    </div>,
+    </div>
+  )
+}
+
+function renderFrame() {
+  let time = Date.now()
+  ReactDOM.render(
+    <Frame time={time} />,
     document.getElementById('root'),
   )
 
@@ -49,7 +60,6 @@ function renderFrame(event) {
   window.requestAnimationFrame(renderFrame)
 }
 
-// Render the first frame
 renderFrame()
 
 
